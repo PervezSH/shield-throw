@@ -8,7 +8,14 @@ public class PlayerMovement : MonoBehaviour
 
     public float movementSpeed = 10f;
     public float turnSmoothTime = 0.1f;
+    
     float turnSmoothVelocity;
+    int animLayer = 0;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     void Update()
     {
@@ -17,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f)
+        if (direction.magnitude >= 0.1f && !isPlaying(anim, "Goalie Throw"))
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -32,5 +39,14 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("Running", false);
         }
+    }
+
+    bool isPlaying(Animator anim, string stateName)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(animLayer).IsName(stateName) &&
+                anim.GetCurrentAnimatorStateInfo(animLayer).normalizedTime < 1.0f)
+            return true;
+        else
+            return false;
     }
 }
