@@ -37,7 +37,7 @@ public class ShieldThrowing : MonoBehaviour
         if (!anim.GetBool("Aiming"))
             shieldRb.AddForce(transform.forward * throwPower * Time.deltaTime, ForceMode.Impulse);
         else
-            shieldRb.AddForce(throwDir * throwPower * Time.deltaTime, ForceMode.Impulse);
+            shieldRb.AddForce(throwDir.normalized * throwPower * Time.deltaTime, ForceMode.Impulse);
     }
 
     void returningThrowDir()
@@ -48,7 +48,7 @@ public class ShieldThrowing : MonoBehaviour
             hit_point = hit.point;
         else
             hit_point = ray.GetPoint(100f);
+
         throwDir = hit_point - throwSource.position;
-        throwDir = throwDir / throwDir.magnitude;
     }
 }
