@@ -2,7 +2,7 @@
 
 ## About The Project
 
-Recreated Captain America's Shield Throw ability. It also has a player movement script attached to it, for moving the player around and a third-person camera controller script to look around.
+Recreated Captain America's Shield Throw. It also has a player movement script attached to it, for moving the player around and a third-person camera controller script to look around.
 
 ## Build With
 
